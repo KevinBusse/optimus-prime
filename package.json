@@ -1,0 +1,26 @@
+{
+    "name": "optimus-prime",
+    "version": "0.0.1",
+    "description": "Web request response transformer.",
+    "main": "app.js",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com:KevinBusse/optimus-prime.git"
+    },
+    "keywords": [
+        "nodejs"
+    ],
+    "author": "",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/KevinBusse/optimus-prime/issues"
+    },
+    "engines": {
+        "node": "0.10.15",
+        "npm": "1.3.5"
+    },
+    "dependencies": {
+        "xmlbuilder": "2.1.0",
+        "dot": "1.0.2"
+    }
+}

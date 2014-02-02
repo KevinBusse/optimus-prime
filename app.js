@@ -1,7 +1,9 @@
 var http = require("http"),
     fs = require('fs'),
     util = require('util'),
-    xmlBuilder = require('xmlbuilder');
+    xmlBuilder = require('xmlbuilder'),
+    doT = require('dot'),
+    generateError;
 
 function convertRequestToXml(request) {
     var requestXml = xmlBuilder.create(
@@ -27,6 +29,10 @@ function convertRequestToXml(request) {
     return requestXml;
 }
 
+util.log("Initializing, started in " + __dirname);
+
+generateError = doT.template(fs.readFileSync(__dirname + "/templates/errors.html").toString());
+
 http.createServer(function(request, response){
     // TODO: create & apply project / site mapper
 
@@ -39,11 +45,17 @@ http.createServer(function(request, response){
     response.write(requestXml.end({pretty: true}));
     response.end();
 */
+/*
     fs.readFile('errorpages/project-not-found.html', function(err, data) {
         response.writeHead(200, {"Content-Type": "text/html", "Content-Length": data.length});
         response.write(data);
         response.end();
     });
+*/
+    var data = generateError({error: 'Project not found.'});
+    response.writeHead(200, {"Content-Type": "text/html", "Content-Length": data.length});
+    response.write(data);
+    response.end();
 }).listen(80);
 
 util.log("Server Running on 80");
